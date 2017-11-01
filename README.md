@@ -9,9 +9,9 @@ To use this library in your project simply add this to your Maven pom.xml.
 
 ```xml
 <dependency>
-    <groupId>net.exodusproject</groupId>
-    <artifactId>iommu-database</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <groupId>com.github.marandus</groupId>
+    <artifactId>pci-ids</artifactId>
+    <version>0.1</version>
 </dependency>
 ```
 
@@ -21,6 +21,7 @@ repository and build the library yourself.
 ```bash
 git clone git@github.com:marandus/pci-ids.git
 cd pci-ids
+git checkout pci-ids-0.1
 mvn install
 ```
 
