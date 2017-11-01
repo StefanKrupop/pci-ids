@@ -10,8 +10,8 @@ To use this library in your project simply add this to your Maven pom.xml.
 ```xml
 <dependency>
     <groupId>net.exodusproject</groupId>
-	<artifactId>iommu-database</artifactId>
-	<version>0.1-SNAPSHOT</version>
+    <artifactId>iommu-database</artifactId>
+    <version>0.1-SNAPSHOT</version>
 </dependency>
 ```
 
