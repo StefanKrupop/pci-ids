@@ -1,0 +1,30 @@
+#
+#	List of PCI ID's
+#
+#	Version: 2017.10.21
+#	Date:    2017-10-21 03:15:01
+#
+#	Maintained by Albert Pool, Martin Mares, and other volunteers from
+#	the PCI ID Project at http://pci-ids.ucw.cz/.
+#
+#	New data are always welcome, especially if they are accurate. If you have
+#	anything to contribute, please follow the instructions at the web site.
+#
+#	This file can be distributed under either the GNU General Public License
+#	(version 2 or higher) or the 3-clause BSD License.
+#
+
+# Vendors, devices and subsystems. Please keep sorted.
+
+# Syntax:
+# vendor  vendor_name
+#	device  device_name				<-- single tab
+#		subvendor subdevice  subsystem_name	<-- two tabs
+
+# Comment on vendor
+001c  PEAK-System Technik GmbH
+# Comment on device
+	0001  PCAN-PCI CAN-Bus controller
+# Comment on subsystem
+		001c 0004  2 Channel CAN Bus SJC1000
+		001c 0005  2 Channel CAN Bus SJC1000 MOCK
