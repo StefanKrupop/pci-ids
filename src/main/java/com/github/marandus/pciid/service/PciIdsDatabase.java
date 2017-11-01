@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.exodusproject.pciid.service;
+package com.github.marandus.pciid.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,9 +25,9 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import net.exodusproject.pciid.model.Device;
-import net.exodusproject.pciid.model.Subsystem;
-import net.exodusproject.pciid.model.Vendor;
+import com.github.marandus.pciid.model.Device;
+import com.github.marandus.pciid.model.Subsystem;
+import com.github.marandus.pciid.model.Vendor;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;

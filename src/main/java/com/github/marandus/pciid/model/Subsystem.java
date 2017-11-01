@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.exodusproject.pciid.model;
+package com.github.marandus.pciid.model;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import net.exodusproject.pciid.service.ArgumentValidator;
+import com.github.marandus.pciid.service.ArgumentValidator;
 
 /**
  * Java representation of a PCI device subsystem. Each subsystem is identified by the unique

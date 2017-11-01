@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.exodusproject.pciid.service;
+package com.github.marandus.pciid.service;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import net.exodusproject.pciid.model.Device;
-import net.exodusproject.pciid.model.Subsystem;
-import net.exodusproject.pciid.model.Vendor;
+import com.github.marandus.pciid.model.Device;
+import com.github.marandus.pciid.model.Subsystem;
+import com.github.marandus.pciid.model.Vendor;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

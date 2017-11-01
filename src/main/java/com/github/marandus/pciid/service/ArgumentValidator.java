@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.exodusproject.pciid.service;
+package com.github.marandus.pciid.service;
 
 import java.util.Objects;
 import lombok.Getter;
@@ -30,9 +30,8 @@ public class ArgumentValidator {
     /**
      * Test <tt>arg</tt> to be non-blank as defined by the
      * {@link StringUtils#isBlank(java.lang.CharSequence) StringUtils.isBlank()} method. If
-     * <tt>arg</tt>
-     * is blank, an IllegalArgumentException will be raised. The exception message will be
-     * constructed as follows:
+     * <tt>arg</tt> is blank, an IllegalArgumentException will be raised. The exception message will
+     * be constructed as follows:
      * <p>
      * <tt>msg + ": " + arg</tt>
      *
@@ -93,10 +92,9 @@ public class ArgumentValidator {
 
     /**
      * Test <tt>arg</tt> to be non-null as defined by the
-     * {@link Objects#isNull(java.lang.Object) Objects.isNull()} method. If
-     *
-     * @c arg is null, an IllegalArgumentException will be raised. The exception message will be
-     * constructed as follows:
+     * {@link Objects#isNull(java.lang.Object) Objects.isNull()} method. If <tt>arg</tt> is null, an
+     * IllegalArgumentException will be raised. The exception message will be constructed as
+     * follows:
      * <p>
      * <tt>"NULL: " + msg</tt>
      *

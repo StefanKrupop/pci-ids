@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.exodusproject.pciid.model;
+package com.github.marandus.pciid.model;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,7 +22,7 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import net.exodusproject.pciid.service.ArgumentValidator;
+import com.github.marandus.pciid.service.ArgumentValidator;
 
 /**
  * Java representation of a PCI device vendor. Each vendor has a unique 16 Bit ID, represented by
