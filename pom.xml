@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.github.marandus</groupId>
     <artifactId>pci-ids</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <name>pci-ids</name>
@@ -31,7 +31,7 @@
         <connection>scm:git:git@github.com:marandus/pci-ids.git</connection>
         <developerConnection>scm:git:git@github.com:marandus/pci-ids.git</developerConnection>
         <url>https://github.com/marandus/pci-ids</url>
-        <tag>HEAD</tag>
+        <tag>pci-ids-0.2</tag>
     </scm>
 
     <distributionManagement>
