@@ -11,17 +11,17 @@ To use this library in your project simply add this to your Maven pom.xml.
 <dependency>
     <groupId>com.github.marandus</groupId>
     <artifactId>pci-ids</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
 </dependency>
 ```
 
-Please note that this JAR is not yet available via a Maven repository, thus you need to clone this
-repository and build the library yourself.
+This library should be available via Maven Central. If you are unable to obtain it from there,
+you may build and install it into your local Maven repository by using the following commands.
 
 ```bash
 git clone git@github.com:marandus/pci-ids.git
 cd pci-ids
-git checkout pci-ids-0.1
+git checkout pci-ids-0.2
 mvn install
 ```
 
@@ -70,13 +70,13 @@ from outside the library.
 ## License
 
     Copyright 2017 Thomas Rix
- 
+
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
- 
+
         http://www.apache.org/licenses/LICENSE-2.0
- 
+
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

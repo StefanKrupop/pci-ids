@@ -5,10 +5,12 @@
     <artifactId>pci-ids</artifactId>
     <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
-    
+
+    <name>pci-ids</name>
     <description>A library to parse the PCI IDs database file and make its contents available.</description>
+    <url>https://github.com/marandus/pci-ids</url>
     <inceptionYear>2017</inceptionYear>
-    
+
     <licenses>
         <license>
             <name>The Apache License, Version 2.0</name>
@@ -24,14 +26,14 @@
             <url>https://github.com/marandus</url>
         </developer>
     </developers>
-    
+
     <scm>
         <connection>scm:git:git@github.com:marandus/pci-ids.git</connection>
         <developerConnection>scm:git:git@github.com:marandus/pci-ids.git</developerConnection>
         <url>https://github.com/marandus/pci-ids</url>
-      <tag>HEAD</tag>
-  </scm>
-    
+        <tag>HEAD</tag>
+    </scm>
+
     <distributionManagement>
         <snapshotRepository>
             <id>ossrh</id>
@@ -42,13 +44,13 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -70,7 +72,7 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.25</version>
         </dependency>
-        
+
         <!-- TEST dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -91,7 +93,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -107,9 +109,9 @@
             </plugin>
         </plugins>
     </build>
-    
+
     <profiles>
-        <profile> 
+        <profile>
             <id>release</id>
             <build>
                 <plugins>
@@ -161,7 +163,7 @@
                         <configuration>
                             <serverId>ossrh</serverId>
                             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
                         </configuration>
                     </plugin>
                 </plugins>
