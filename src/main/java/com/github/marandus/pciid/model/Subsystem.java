@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2017 Thomas Rix.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,6 +27,7 @@ import com.github.marandus.pciid.service.ArgumentValidator;
  * the comment field is optional.
  *
  * @author Thomas Rix (thomasrix@exodus-project.net)
+ * @since 0.1
  */
 @Getter
 @EqualsAndHashCode(of = {"id", "vendorId", "name"})

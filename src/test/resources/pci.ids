@@ -28,3 +28,19 @@
 # Comment on subsystem
 		001c 0004  2 Channel CAN Bus SJC1000
 		001c 0005  2 Channel CAN Bus SJC1000 MOCK
+
+
+# List of known device classes, subclasses and programming interfaces
+
+# Syntax:
+# C class	class_name
+#	subclass	subclass_name  		<-- single tab
+#		prog-if  prog-if_name  	<-- two tabs
+
+# Comment on device class
+C 01  Mass storage controller
+# Comment on device subclass
+	05  ATA controller
+# Comment on program interface
+		20  ADMA single stepping
+		30  ADMA continuous operation
