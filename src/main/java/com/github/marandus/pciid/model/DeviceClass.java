@@ -15,6 +15,7 @@
  */
 package com.github.marandus.pciid.model;
 
+import com.github.marandus.pciid.service.ArgumentValidator;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,86 +23,86 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import com.github.marandus.pciid.service.ArgumentValidator;
 
 /**
- * Java representation of a PCI device vendor. Each vendor has a unique 16 Bit ID, represented by
- * four hex-characters, and a mandatory name. The comment field is optional.
+ * Java representation of a PCI device class. Each class has an 8 Bit unique ID, represented by two
+ * hex-characters, and a mandatory name. The comment field is optional.
  *
  * @author Thomas Rix (thomasrix@exodus-project.net)
- * @since 0.1
+ * @since 0.3
  */
 @Getter
 @EqualsAndHashCode(of = {"id", "name"})
 @ToString
-public class Vendor implements Comparable<Vendor> {
+public class DeviceClass implements Comparable<DeviceClass> {
 
     /**
-     * String representation of the unique 16 Bit ID.
+     * String representation of the unique 8 Bit ID.
      */
     private final String id;
     private final String name;
     private final String comment;
 
     /**
-     * Internal map of devices belonging to this vendor. Identified by their unique 16 Bit ID.
+     * Internal map of subclasses belonging to this device class. Identified by their unique 8 Bit
+     * ID.
      */
-    private final Map<String, Device> devices;
+    private final Map<String, DeviceSubclass> subclasses;
 
     /**
-     * Integer representation of the unique 16 Bit ID. For internal use only.
+     * Integer representation of the unique 8 Bit ID. For internal use only.
      */
     @Getter(AccessLevel.NONE)
     private final Integer numericId;
 
     /**
-     * Create a new Vendor database entry.
+     * Create a new Device Class database entry.
      *
-     * @param id Unique 16 Bit ID
-     * @param name Full name of the vendor
+     * @param id Unique 8 Bit ID
+     * @param name Full name of the device class
      * @param comment Optional comment, may be null
      */
-    public Vendor(String id, String name, String comment) {
-        ArgumentValidator.requireStringLength(id, 4, ArgumentValidator.NumberCompare.EQUAL, "Vendor ID");
-        ArgumentValidator.requireNonBlank(name, "Vendor name");
+    public DeviceClass(String id, String name, String comment) {
+        ArgumentValidator.requireStringLength(id, 2, ArgumentValidator.NumberCompare.EQUAL, "Device class ID");
+        ArgumentValidator.requireNonBlank(name, "Device class name");
 
         this.id = id;
         this.name = name;
         this.comment = comment;
-        this.devices = new HashMap<>();
+        this.subclasses = new HashMap<>();
 
         this.numericId = Integer.decode("0x" + id);
     }
 
     /**
-     * Add a new device to the internal devices map.
+     * Add a new device subclass to the internal subclasses map.
      *
-     * @param device Device to add
+     * @param subclass Subclass to add
      */
-    public void addDevice(Device device) {
-        ArgumentValidator.requireNonNull(device, "Vendor device");
+    public void addSubclass(DeviceSubclass subclass) {
+        ArgumentValidator.requireNonNull(subclass, "Device subclass");
 
-        this.devices.put(device.getId(), device);
+        this.subclasses.put(subclass.getId(), subclass);
     }
 
     /**
-     * Retrieve an unmodifiable view of the devices map.
+     * Retrieve an unmodifiable view of the device subclasses map.
      *
      * @return Unmodifiable map view
      */
-    public Map<String, Device> getDevices() {
-        return Collections.unmodifiableMap(this.devices);
+    public Map<String, DeviceSubclass> getSubclasses() {
+        return Collections.unmodifiableMap(this.subclasses);
     }
 
     /**
-     * Compare this object to another {@link Vendor} object. Comparison will take place on the
+     * Compare this object to another {@link DeviceClass} object. Comparison will take place on the
      * integer representation of the unique ID.
      *
      * @param t Other object
      * @return Result of comparison
      */
     @Override
-    public int compareTo(Vendor t) {
+    public int compareTo(DeviceClass t) {
         return this.numericId.compareTo(t.numericId);
     }
 }

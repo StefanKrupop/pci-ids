@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2017 Thomas Rix.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
  * Utility class to validate method arguments.
  *
  * @author Thomas Rix (thomasrix@exodus-project.net)
- * @since 1.0
+ * @since 0.1
  */
 public class ArgumentValidator {
 

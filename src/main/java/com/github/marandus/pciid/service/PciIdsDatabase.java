@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2017 Thomas Rix.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,6 +26,9 @@ import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import com.github.marandus.pciid.model.Device;
+import com.github.marandus.pciid.model.DeviceClass;
+import com.github.marandus.pciid.model.DeviceSubclass;
+import com.github.marandus.pciid.model.ProgramInterface;
 import com.github.marandus.pciid.model.Subsystem;
 import com.github.marandus.pciid.model.Vendor;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -37,7 +40,7 @@ import org.apache.http.impl.client.HttpClients;
  * Main entry point into the PCI IDs database library.
  *
  * @author Thomas Rix (thomasrix@exodus-project.net)
- * @since 1.0
+ * @since 0.1
  *
  * @see <a href="https://pci-ids.ucw.cz/">The PCI ID Repository</a>
  */
@@ -52,14 +55,16 @@ public class PciIdsDatabase {
     @Getter
     private boolean ready = false;
 
-    private final Map<String, Vendor> database;
+    private final Map<String, Vendor> vendorDatabase;
+    private final Map<String, DeviceClass> deviceClassDatabase;
     private final DatabaseFileParser parser;
 
     /**
      * Create a new empty database
      */
     public PciIdsDatabase() {
-        this.database = new TreeMap<>();
+        this.vendorDatabase = new TreeMap<>();
+        this.deviceClassDatabase = new TreeMap<>();
         this.parser = new DatabaseFileParser();
     }
 
@@ -70,6 +75,7 @@ public class PciIdsDatabase {
      *
      * @throws IOException if the database file cannot be read, is malformed or otherwise
      * unprocessable
+     * @since 0.1
      */
     public synchronized void loadRemote() throws IOException {
         URI uri = URI.create(this.PCI_IDS_URL);
@@ -85,6 +91,7 @@ public class PciIdsDatabase {
      * @param uri Remote location of the pci.ids file
      * @throws IOException if the database file cannot be read, is malformed or otherwise
      * unprocessable
+     * @since 0.1
      */
     public synchronized void loadRemote(URI uri) throws IOException {
         this._loadRemote(uri);
@@ -98,6 +105,7 @@ public class PciIdsDatabase {
      * @param is Input stream holding the database file contents
      * @throws IOException if the database file cannot be read, is malformed or otherwise
      * unprocessable
+     * @since 0.1
      */
     public synchronized void loadStream(InputStream is) throws IOException {
         this._loadStream(is);
@@ -109,10 +117,11 @@ public class PciIdsDatabase {
      *
      * @return List of vendors
      * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.1
      */
-    public synchronized List<Vendor> findAllVendors() {
+    public List<Vendor> findAllVendors() {
         if (this.ready) {
-            List<Vendor> rv = this.database.values().stream()
+            List<Vendor> rv = this.vendorDatabase.values().stream()
                     .sorted()
                     .collect(Collectors.toList());
 
@@ -129,10 +138,11 @@ public class PciIdsDatabase {
      * @param vendorId Vendor ID to search for
      * @return Requested vendor object or null
      * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.1
      */
-    public synchronized Vendor findVendor(String vendorId) {
+    public Vendor findVendor(String vendorId) {
         if (this.ready) {
-            Vendor rv = this.database.get(vendorId);
+            Vendor rv = this.vendorDatabase.get(vendorId);
 
             return rv;
         }
@@ -147,10 +157,11 @@ public class PciIdsDatabase {
      * @param vendorId Vendor ID to search for
      * @return List of vendor's devices
      * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.1
      */
-    public synchronized List<Device> findAllDevices(final String vendorId) {
+    public List<Device> findAllDevices(final String vendorId) {
         if (this.ready) {
-            Vendor v = this.database.get(vendorId);
+            Vendor v = this.vendorDatabase.get(vendorId);
             if (v == null) {
                 return new ArrayList<>(0);
             }
@@ -173,10 +184,11 @@ public class PciIdsDatabase {
      * @param deviceId Device ID to search for
      * @return Requested device object or null
      * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.1
      */
-    public synchronized Device findDevice(final String vendorId, final String deviceId) {
+    public Device findDevice(final String vendorId, final String deviceId) {
         if (this.ready) {
-            Vendor v = this.database.get(vendorId);
+            Vendor v = this.vendorDatabase.get(vendorId);
             if (v == null) {
                 return null;
             }
@@ -198,10 +210,11 @@ public class PciIdsDatabase {
      * @param deviceId Device ID to search for
      * @return List of device's subsystems
      * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.1
      */
-    public synchronized List<Subsystem> findAllSubsystems(final String vendorId, final String deviceId) {
+    public List<Subsystem> findAllSubsystems(final String vendorId, final String deviceId) {
         if (this.ready) {
-            Vendor v = this.database.get(vendorId);
+            Vendor v = this.vendorDatabase.get(vendorId);
             if (v == null) {
                 return new ArrayList<>(0);
             }
@@ -232,10 +245,11 @@ public class PciIdsDatabase {
      * @param subvendorId Subsystem vendor ID to search for
      * @return List of device's subsystems
      * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.1
      */
-    public synchronized List<Subsystem> findAllSubsystemsWithVendor(final String vendorId, final String deviceId, final String subvendorId) {
+    public List<Subsystem> findAllSubsystemsWithVendor(final String vendorId, final String deviceId, final String subvendorId) {
         if (this.ready) {
-            Vendor v = this.database.get(vendorId);
+            Vendor v = this.vendorDatabase.get(vendorId);
             if (v == null) {
                 return new ArrayList<>(0);
             }
@@ -249,6 +263,160 @@ public class PciIdsDatabase {
                     .filter(s -> s.getVendorId().equals(subvendorId))
                     .sorted()
                     .collect(Collectors.toList());
+
+            return rv;
+        }
+
+        throw new IllegalStateException("Database not ready");
+    }
+
+    /**
+     * Retrieve a list of all device classes found in the database. If the database is empty, the
+     * returned list is empty as well.
+     *
+     * @return List of device classes
+     * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.3
+     */
+    public List<DeviceClass> findAllDeviceClasses() {
+        if (this.ready) {
+            List<DeviceClass> rv = this.deviceClassDatabase.values().stream()
+                    .sorted()
+                    .collect(Collectors.toList());
+
+            return rv;
+        }
+
+        throw new IllegalStateException("Database not ready");
+    }
+
+    /**
+     * Retrieve a specific device class from the database. If the vendor ID does not exist, the
+     * return value is <tt>null</tt>.
+     *
+     * @param classId Device class ID to search for
+     * @return Requested device class object or null
+     * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.3
+     */
+    public DeviceClass findDeviceClass(String classId) {
+        if (this.ready) {
+            DeviceClass rv = this.deviceClassDatabase.get(classId);
+
+            return rv;
+        }
+
+        throw new IllegalStateException("Database not ready");
+    }
+
+    /**
+     * Retrieve a list of all known subclasses for a specific device class. If the device class does
+     * not exist or no subclasses are known for this device class, the returned list is empty.
+     *
+     * @param classId Device class ID to search for
+     * @return List of device class' subclasses
+     * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.3
+     */
+    public List<DeviceSubclass> findAllDeviceSubclasses(String classId) {
+        if (this.ready) {
+            DeviceClass d = this.deviceClassDatabase.get(classId);
+            if (d == null) {
+                return new ArrayList<>(0);
+            }
+
+            List<DeviceSubclass> rv = d.getSubclasses().values().stream()
+                    .sorted()
+                    .collect(Collectors.toList());
+
+            return rv;
+        }
+
+        throw new IllegalStateException("Database not ready");
+    }
+
+    /**
+     * Retrieve a specific subclass for a specific device class. If the device class or subclass
+     * does not exist, the return value is <tt>null</tt>.
+     *
+     * @param classId Device class ID to search for
+     * @param subclassId Subclass ID to search for
+     * @return Requested subclass object or null
+     * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.3
+     */
+    public DeviceSubclass findDeviceSubclass(String classId, String subclassId) {
+        if (this.ready) {
+            DeviceClass d = this.deviceClassDatabase.get(classId);
+            if (d == null) {
+                return null;
+            }
+
+            DeviceSubclass rv = d.getSubclasses().get(subclassId);
+
+            return rv;
+        }
+
+        throw new IllegalStateException("Database not ready");
+    }
+
+    /**
+     * Retrieve a list of all known program interfaces for a specific device subclass. If the device
+     * subclass does not exist or no program interfaces are known for this device subclass, the
+     * returned list is empty.
+     *
+     * @param classId Device class ID to search for
+     * @param subclassId Subclass ID to search for
+     * @return List of device subclass' program interfaces
+     * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.3
+     */
+    public List<ProgramInterface> findAllProgramInterfaces(String classId, String subclassId) {
+        if (this.ready) {
+            DeviceClass d = this.deviceClassDatabase.get(classId);
+            if (d == null) {
+                return new ArrayList<>(0);
+            }
+
+            DeviceSubclass s = d.getSubclasses().get(subclassId);
+            if (s == null) {
+                return new ArrayList<>(0);
+            }
+
+            List<ProgramInterface> rv = s.getProgramInterfaces().values().stream()
+                    .sorted()
+                    .collect(Collectors.toList());
+
+            return rv;
+        }
+
+        throw new IllegalStateException("Database not ready");
+    }
+
+    /**
+     * Retrieve a specific program interface for a specific device subclass. If the device class,
+     * subclass, or program interface does not exist, the return value is <tt>null</tt>.
+     *
+     * @param classId Device class ID to search for
+     * @param subclassId Subclass ID to search for
+     * @param ifaceId Program interface ID to search for
+     * @return Requested program interface object or null
+     * @throws IllegalStateException if database is not ready, i.e. no database file was loaded
+     * @since 0.3
+     */
+    public ProgramInterface findProgramInterface(String classId, String subclassId, String ifaceId) {
+        if (this.ready) {
+            DeviceClass d = this.deviceClassDatabase.get(classId);
+            if (d == null) {
+                return null;
+            }
+
+            DeviceSubclass s = d.getSubclasses().get(subclassId);
+            if (s == null) {
+                return null;
+            }
+
+            ProgramInterface rv = s.getProgramInterfaces().get(ifaceId);
 
             return rv;
         }
@@ -291,13 +459,11 @@ public class PciIdsDatabase {
         // Lock and clear existing database, if required
         if (this.ready) {
             this.ready = false;
-            this.database.clear();
+            this.vendorDatabase.clear();
+            this.deviceClassDatabase.clear();
         }
 
-        List<Vendor> vendors = this.parser.parseDatabaseFile(is);
-        vendors.forEach((v) -> {
-            this.database.put(v.getId(), v);
-        });
+        this.parser.parseDatabaseFile(is, this.vendorDatabase, this.deviceClassDatabase);
 
         this.ready = true;
     }

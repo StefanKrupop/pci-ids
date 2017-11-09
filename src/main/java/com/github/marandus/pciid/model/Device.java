@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright 2017 Thomas Rix.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,7 @@ import com.github.marandus.pciid.service.ArgumentValidator;
  * optional.
  *
  * @author Thomas Rix (thomasrix@exodus-project.net)
- * @since 1.0
+ * @since 0.1
  */
 @Getter
 @EqualsAndHashCode(of = {"id", "name"})
@@ -75,7 +75,7 @@ public class Device implements Comparable<Device> {
     }
 
     /**
-     * Add a new subsystem to the internal subsystems map.
+     * Add a new subsystem to the internal subsystems set.
      *
      * @param subsys Subsystem to add
      */
