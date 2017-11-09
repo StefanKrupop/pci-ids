@@ -11,7 +11,7 @@ To use this library in your project simply add this to your Maven pom.xml.
 <dependency>
     <groupId>com.github.marandus</groupId>
     <artifactId>pci-ids</artifactId>
-    <version>0.2</version>
+    <version>0.3</version>
 </dependency>
 ```
 
@@ -21,7 +21,7 @@ you may build and install it into your local Maven repository by using the follo
 ```bash
 git clone git@github.com:marandus/pci-ids.git
 cd pci-ids
-git checkout pci-ids-0.2
+git checkout pci-ids-0.3
 mvn install
 ```
 
