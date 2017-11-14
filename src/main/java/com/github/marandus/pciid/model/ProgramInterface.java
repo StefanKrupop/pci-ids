@@ -15,7 +15,8 @@
  */
 package com.github.marandus.pciid.model;
 
-import com.github.marandus.pciid.service.ArgumentValidator;
+import com.github.marandus.argval.ArgumentValidator;
+import com.github.marandus.argval.enums.NumberCompareOperator;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -55,7 +56,7 @@ public class ProgramInterface implements Comparable<ProgramInterface> {
      * @param comment Optional comment, may be null
      */
     public ProgramInterface(String id, String name, String comment) {
-        ArgumentValidator.requireStringLength(id, 2, ArgumentValidator.NumberCompare.EQUAL, "Program interface ID");
+        ArgumentValidator.requireStringLength(id, 2, NumberCompareOperator.EQUAL, "Program interface ID");
         ArgumentValidator.requireNonBlank(name, "Program interface name");
 
         this.id = id;

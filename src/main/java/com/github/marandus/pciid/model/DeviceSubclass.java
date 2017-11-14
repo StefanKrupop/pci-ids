@@ -15,7 +15,8 @@
  */
 package com.github.marandus.pciid.model;
 
-import com.github.marandus.pciid.service.ArgumentValidator;
+import com.github.marandus.argval.ArgumentValidator;
+import com.github.marandus.argval.enums.NumberCompareOperator;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class DeviceSubclass implements Comparable<DeviceSubclass> {
      * @param comment Optional comment, may be null
      */
     public DeviceSubclass(String id, String name, String comment) {
-        ArgumentValidator.requireStringLength(id, 2, ArgumentValidator.NumberCompare.EQUAL, "Device subclass ID");
+        ArgumentValidator.requireStringLength(id, 2, NumberCompareOperator.EQUAL, "Device subclass ID");
         ArgumentValidator.requireNonBlank(name, "Device subclass name");
 
         this.id = id;

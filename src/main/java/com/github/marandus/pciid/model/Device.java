@@ -15,6 +15,8 @@
  */
 package com.github.marandus.pciid.model;
 
+import com.github.marandus.argval.ArgumentValidator;
+import com.github.marandus.argval.enums.NumberCompareOperator;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +24,6 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import com.github.marandus.pciid.service.ArgumentValidator;
 
 /**
  * Java representation of a PCI device. Each device has a 16 Bit ID, which is unique in the scope of
@@ -63,7 +64,7 @@ public class Device implements Comparable<Device> {
      * @param comment Optional comment, may be null
      */
     public Device(String id, String name, String comment) {
-        ArgumentValidator.requireStringLength(id, 4, ArgumentValidator.NumberCompare.EQUAL, "Device ID");
+        ArgumentValidator.requireStringLength(id, 4, NumberCompareOperator.EQUAL, "Device ID");
         ArgumentValidator.requireNonBlank(name, "Device name");
 
         this.id = id;

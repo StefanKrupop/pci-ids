@@ -15,11 +15,12 @@
  */
 package com.github.marandus.pciid.model;
 
+import com.github.marandus.argval.ArgumentValidator;
+import com.github.marandus.argval.enums.NumberCompareOperator;
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import com.github.marandus.pciid.service.ArgumentValidator;
 
 /**
  * Java representation of a PCI device subsystem. Each subsystem is identified by the unique
@@ -68,8 +69,8 @@ public class Subsystem implements Comparable<Subsystem> {
      * @param vendorId Vendor ID of this subsystem's vendor
      */
     public Subsystem(String id, String name, String comment, String vendorId) {
-        ArgumentValidator.requireStringLength(vendorId, 4, ArgumentValidator.NumberCompare.EQUAL, "Subsystem vendor ID");
-        ArgumentValidator.requireStringLength(id, 4, ArgumentValidator.NumberCompare.EQUAL, "Subsystem ID");
+        ArgumentValidator.requireStringLength(vendorId, 4, NumberCompareOperator.EQUAL, "Subsystem vendor ID");
+        ArgumentValidator.requireStringLength(id, 4, NumberCompareOperator.EQUAL, "Subsystem ID");
         ArgumentValidator.requireNonBlank(name, "Subsystem name");
 
         this.id = id;
