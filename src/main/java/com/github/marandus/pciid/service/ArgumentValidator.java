@@ -16,7 +16,6 @@
 package com.github.marandus.pciid.service;
 
 import java.util.Objects;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Utility class to validate method arguments.
@@ -40,7 +39,7 @@ public class ArgumentValidator {
      * @throws IllegalArgumentException if specified argument is blank
      */
     public static void requireNonBlank(String arg, String msg) {
-        if (StringUtils.isBlank(arg)) {
+        if (arg == null || arg.isBlank()) {
             throw new IllegalArgumentException(msg + ": " + arg);
         }
     }

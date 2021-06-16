@@ -28,7 +28,6 @@ import com.github.marandus.pciid.model.ProgramInterface;
 import com.github.marandus.pciid.model.Subsystem;
 import com.github.marandus.pciid.model.Vendor;
 import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Parser class for contents of the PCI IDs file.
@@ -106,7 +105,7 @@ class DatabaseFileParser {
             while (line != null) {
                 // If current line is blank, discard previous comments and continue
                 // This is used to discard the file header
-                if (StringUtils.isBlank(line)) {
+                if (line.isBlank()) {
                     this.currentComment = null;
                     line = br.readLine();
                     continue;
