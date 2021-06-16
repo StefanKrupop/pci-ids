@@ -37,7 +37,6 @@ import org.apache.commons.lang3.StringUtils;
  * @since 0.1
  */
 class DatabaseFileParser {
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DatabaseFileParser.class);
     /**
      * RegEx pattern used to parse database file lines of type {@link LineType#VENDOR VENDOR}.
      */

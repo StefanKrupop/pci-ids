@@ -43,7 +43,6 @@ import org.apache.http.impl.client.HttpClients;
  * @see <a href="https://pci-ids.ucw.cz/">The PCI ID Repository</a>
  */
 public class PciIdsDatabase {
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(PciIdsDatabase.class);
     /**
      * Default URI for remote pci-ids file
      */
