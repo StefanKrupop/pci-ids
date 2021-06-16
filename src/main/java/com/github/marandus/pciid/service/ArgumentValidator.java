@@ -16,7 +16,6 @@
 package com.github.marandus.pciid.service;
 
 import java.util.Objects;
-import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -126,11 +125,14 @@ public class ArgumentValidator {
         /**
          * String representation of operator.
          */
-        @Getter
         private final String operator;
 
         private NumberCompare(String op) {
             this.operator = op;
+        }
+
+        public String getOperator() {
+            return this.operator;
         }
     }
 }

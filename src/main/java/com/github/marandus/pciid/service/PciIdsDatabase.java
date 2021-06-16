@@ -23,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import com.github.marandus.pciid.model.Device;
 import com.github.marandus.pciid.model.DeviceClass;
 import com.github.marandus.pciid.model.DeviceSubclass;
@@ -44,15 +42,13 @@ import org.apache.http.impl.client.HttpClients;
  *
  * @see <a href="https://pci-ids.ucw.cz/">The PCI ID Repository</a>
  */
-@Slf4j
 public class PciIdsDatabase {
-
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(PciIdsDatabase.class);
     /**
      * Default URI for remote pci-ids file
      */
     public final String PCI_IDS_URL = "https://pci-ids.ucw.cz/v2.2/pci.ids";
 
-    @Getter
     private boolean ready = false;
 
     private final Map<String, Vendor> vendorDatabase;
@@ -466,5 +462,9 @@ public class PciIdsDatabase {
         this.parser.parseDatabaseFile(is, this.vendorDatabase, this.deviceClassDatabase);
 
         this.ready = true;
+    }
+
+    public boolean isReady() {
+        return this.ready;
     }
 }

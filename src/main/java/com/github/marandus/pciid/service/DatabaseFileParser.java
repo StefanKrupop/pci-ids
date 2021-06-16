@@ -21,7 +21,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import lombok.extern.slf4j.Slf4j;
 import com.github.marandus.pciid.model.Device;
 import com.github.marandus.pciid.model.DeviceClass;
 import com.github.marandus.pciid.model.DeviceSubclass;
@@ -37,9 +36,8 @@ import org.apache.commons.lang3.StringUtils;
  * @author Thomas Rix (thomasrix@exodus-project.net)
  * @since 0.1
  */
-@Slf4j
 class DatabaseFileParser {
-
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(DatabaseFileParser.class);
     /**
      * RegEx pattern used to parse database file lines of type {@link LineType#VENDOR VENDOR}.
      */

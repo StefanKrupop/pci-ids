@@ -18,10 +18,6 @@ package com.github.marandus.pciid.model;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 import com.github.marandus.pciid.service.ArgumentValidator;
 
 /**
@@ -31,9 +27,6 @@ import com.github.marandus.pciid.service.ArgumentValidator;
  * @author Thomas Rix (thomasrix@exodus-project.net)
  * @since 0.1
  */
-@Getter
-@EqualsAndHashCode(of = {"id", "name"})
-@ToString
 public class Vendor implements Comparable<Vendor> {
 
     /**
@@ -51,7 +44,6 @@ public class Vendor implements Comparable<Vendor> {
     /**
      * Integer representation of the unique 16 Bit ID. For internal use only.
      */
-    @Getter(AccessLevel.NONE)
     private final Integer numericId;
 
     /**
@@ -103,5 +95,55 @@ public class Vendor implements Comparable<Vendor> {
     @Override
     public int compareTo(Vendor t) {
         return this.numericId.compareTo(t.numericId);
+    }
+
+    /**
+     * String representation of the unique 16 Bit ID.
+     */
+    public String getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getComment() {
+        return this.comment;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Vendor)) return false;
+        final Vendor other = (Vendor) o;
+        if (!other.canEqual((java.lang.Object) this)) return false;
+        final java.lang.Object this$id = this.getId();
+        final java.lang.Object other$id = other.getId();
+        if (this$id == null ? other$id != null : !this$id.equals(other$id)) return false;
+        final java.lang.Object this$name = this.getName();
+        final java.lang.Object other$name = other.getName();
+        if (this$name == null ? other$name != null : !this$name.equals(other$name)) return false;
+        return true;
+    }
+
+    protected boolean canEqual(final java.lang.Object other) {
+        return other instanceof Vendor;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final java.lang.Object $id = this.getId();
+        result = result * PRIME + ($id == null ? 43 : $id.hashCode());
+        final java.lang.Object $name = this.getName();
+        result = result * PRIME + ($name == null ? 43 : $name.hashCode());
+        return result;
+    }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "Vendor(id=" + this.getId() + ", name=" + this.getName() + ", comment=" + this.getComment() + ", devices=" + this.getDevices() + ", numericId=" + this.numericId + ")";
     }
 }

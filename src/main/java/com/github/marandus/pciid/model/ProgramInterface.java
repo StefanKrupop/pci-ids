@@ -16,10 +16,6 @@
 package com.github.marandus.pciid.model;
 
 import com.github.marandus.pciid.service.ArgumentValidator;
-import lombok.AccessLevel;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
 
 /**
  * Java representation of a PCI device subclass program interface. Each interface has an 8 Bit ID,
@@ -29,9 +25,6 @@ import lombok.ToString;
  * @author Thomas Rix (thomasrix@exodus-project.net)
  * @since 0.3
  */
-@Getter
-@EqualsAndHashCode(of = {"id", "name"})
-@ToString
 public class ProgramInterface implements Comparable<ProgramInterface> {
 
     /**
@@ -44,7 +37,6 @@ public class ProgramInterface implements Comparable<ProgramInterface> {
     /**
      * Integer representation of the unique 8 Bit ID. For internal use only.
      */
-    @Getter(AccessLevel.NONE)
     private final Integer numericId;
 
     /**
@@ -75,5 +67,52 @@ public class ProgramInterface implements Comparable<ProgramInterface> {
     @Override
     public int compareTo(ProgramInterface t) {
         return this.numericId.compareTo(t.numericId);
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getComment() {
+        return this.comment;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object o) {
+        if (o == this) return true;
+        if (!(o instanceof ProgramInterface)) return false;
+        final ProgramInterface other = (ProgramInterface) o;
+        if (!other.canEqual((java.lang.Object) this)) return false;
+        final java.lang.Object this$id = this.getId();
+        final java.lang.Object other$id = other.getId();
+        if (this$id == null ? other$id != null : !this$id.equals(other$id)) return false;
+        final java.lang.Object this$name = this.getName();
+        final java.lang.Object other$name = other.getName();
+        if (this$name == null ? other$name != null : !this$name.equals(other$name)) return false;
+        return true;
+    }
+
+    protected boolean canEqual(final java.lang.Object other) {
+        return other instanceof ProgramInterface;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+        final int PRIME = 59;
+        int result = 1;
+        final java.lang.Object $id = this.getId();
+        result = result * PRIME + ($id == null ? 43 : $id.hashCode());
+        final java.lang.Object $name = this.getName();
+        result = result * PRIME + ($name == null ? 43 : $name.hashCode());
+        return result;
+    }
+
+    @java.lang.Override
+    public java.lang.String toString() {
+        return "ProgramInterface(id=" + this.getId() + ", name=" + this.getName() + ", comment=" + this.getComment() + ", numericId=" + this.numericId + ")";
     }
 }
